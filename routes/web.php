@@ -29,3 +29,7 @@ Route::post('/publish/{topic}',function(Request $request,$topic){
 
 
 
+Route::post('/subscribe/{topic}',function($topic){
+    //$message=$request->message;
+   Artisan::call("redis:subscribe", ['topic' => $topic]);
+});
