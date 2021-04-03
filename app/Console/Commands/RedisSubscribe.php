@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Console\Commands;
-
+use Redis;
 use Illuminate\Console\Command;
 
 class RedisSubscribe extends Command
@@ -37,7 +37,7 @@ class RedisSubscribe extends Command
      */
     public function handle()
     {
-        Redis::subscribe(['topic1'], function ($message) {
+        Redis::psubscribe(['topic*'], function ($message,$channel) {
             echo $message;
         });
     }

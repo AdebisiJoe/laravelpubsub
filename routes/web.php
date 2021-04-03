@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
+use Illuminate\Http\Request;
+
+Route::get('/', function ()
+ {
     // return view('welcome');
 
     $app = Redis::connection();
 
     print_r($app);
 });
+
+Route::post('/publish/{topic}',function(Request $request,$topic){
+      $message=$request->message;
+     Redis::publish($topic,json_encode(['url'=>$message]));
+});
+
+
+
