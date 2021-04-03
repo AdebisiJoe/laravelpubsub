@@ -11,7 +11,7 @@ class RedisSubscribe extends Command
      *
      * @var string
      */
-    protected $signature = 'redis:subscribe';
+    protected $signature = 'redis:subscribe {topic}';
 
     /**
      * The console command description.
@@ -37,7 +37,7 @@ class RedisSubscribe extends Command
      */
     public function handle()
     {
-        Redis::psubscribe(['topic*'], function ($message,$channel) {
+        Redis::psubscribe([$this->argument('topic')], function ($message,$channel) {
             echo $message;
         });
     }
